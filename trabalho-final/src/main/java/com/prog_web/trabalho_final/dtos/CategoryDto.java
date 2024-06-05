@@ -7,16 +7,16 @@ public class CategoryDto {
 
     @NotBlank
     @Size(max = 100)
-    private String nome;
+    private String name;
     @NotBlank
     private String status;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStatus() {

@@ -4,7 +4,7 @@ import com.prog_web.trabalho_final.dtos.CategoryDto;
 import com.prog_web.trabalho_final.models.CategoryModel;
 import com.prog_web.trabalho_final.services.CategoryService;
 import jakarta.validation.Valid;
-import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +22,16 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryModel> saveCategory(@RequestBody @Valid CategoryDto categoryDto) {
-        return null;
+    public ResponseEntity<Object> saveCategory(@RequestBody @Valid CategoryDto categoryDto) {
+
+        if (categoryService.existsByName(categoryDto.getName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Já existe uma Categoria com o nome informado!");
+        }
+
+        CategoryModel categoryModel = new CategoryModel();
+        BeanUtils.copyProperties(categoryModel, categoryDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryModel);
     }
 
     @GetMapping

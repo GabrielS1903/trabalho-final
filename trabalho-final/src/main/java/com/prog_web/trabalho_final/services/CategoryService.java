@@ -28,4 +28,8 @@ public class CategoryService {
     public void deleteCategory(CategoryModel categoryModelOptional) {
         categoryRepository.delete(categoryModelOptional);
     }
+
+    public boolean existsByName(String name) {
+        return categoryRepository.existsByName(name);
+    }
 }
