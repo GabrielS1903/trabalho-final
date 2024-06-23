@@ -15,7 +15,7 @@ public class CategoryModel implements Serializable {
     private UUID idCategory;
     @Column(nullable = false, length = 100, unique = true)
     private String name;
-    @Column(nullable = false, columnDefinition = "VARCHAR(1) DEFAULT 'A'")
+    @Column(nullable = false, length = 1)
     private String status = "A";
 
     public UUID getIdCategory() {

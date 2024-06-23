@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface FilmRepository extends JpaRepository<FilmModel, UUID> {
+    boolean existsByTitleIgnoreCase(String title);
 }

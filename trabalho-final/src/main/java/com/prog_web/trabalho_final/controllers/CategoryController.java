@@ -23,26 +23,19 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<Object> saveCategory(@RequestBody @Valid CategoryDto categoryDto) {
-
         if (categoryService.existsByName(categoryDto.getName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Já existe uma Categoria com o nome informado!");
         }
 
         CategoryModel categoryModel = new CategoryModel();
-        BeanUtils.copyProperties(categoryModel, categoryDto);
+        BeanUtils.copyProperties(categoryDto, categoryModel);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(categoryModel));
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAllCategories() {
-        List<CategoryModel> categoryModelList = categoryService.findAll();
-
-        if (categoryModelList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma Categoria encontrada!");
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(categoryModelList);
+    public ResponseEntity<List<CategoryModel>> getAllCategories() {
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -66,12 +59,23 @@ public class CategoryController {
 
         categoryService.deleteCategory(categoryModelOptional.get());
 
-        return ResponseEntity.status(HttpStatus.OK).body("Categoria deletada com Sucesso!");
+        return ResponseEntity.status(HttpStatus.OK).body("Categoria deletada com sucesso!");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCategory(@PathVariable(value = "id") UUID id, @RequestBody @Valid CategoryDto categoryDto) {
-        return null;
+        Optional<CategoryModel> categoryModelOptional = categoryService.findById(id);
+
+        if (categoryModelOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada!");
+        }
+
+        CategoryModel categoryModel = new CategoryModel();
+        BeanUtils.copyProperties(categoryDto, categoryModel);
+
+        categoryModel.setIdCategory(categoryModelOptional.get().getIdCategory());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.saveCategory(categoryModel));
     }
 
 }

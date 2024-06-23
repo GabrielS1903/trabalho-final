@@ -16,20 +16,26 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Optional<CategoryModel> findById(UUID id) {
-        return categoryRepository.findById(id);
+    @Transactional
+    public CategoryModel saveCategory(CategoryModel categoryModel) {
+        return categoryRepository.save(categoryModel);
+    }
+
+    public boolean existsByName(String name) {
+        return categoryRepository.existsByNameIgnoreCase(name);
     }
 
     public List<CategoryModel> findAll() {
         return categoryRepository.findAll();
     }
 
-    @Transactional
-    public void deleteCategory(CategoryModel categoryModelOptional) {
-        categoryRepository.delete(categoryModelOptional);
+    public Optional<CategoryModel> findById(UUID id) {
+        return categoryRepository.findById(id);
     }
 
-    public boolean existsByName(String name) {
-        return categoryRepository.existsByName(name);
+    @Transactional
+    public void deleteCategory(CategoryModel categoryModel) {
+        categoryRepository.delete(categoryModel);
     }
+
 }
