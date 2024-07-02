@@ -34,3 +34,7 @@ O sistema possui as seguintes funcionalidades:
 1. Clone este repositório: `git clone https://github.com/GabrielS1903/trabalho-final.git`
 2. Navegue até o diretório `backend` e execute o seguinte comando para compilar e executar o projeto: mvn spring-boot
 3. Abra o navegador e acesse `http://localhost:8080` para testar a API.
+
+## Swagger (Springdoc OpenAPI)
+
+Este projeto utiliza o Swagger para documentação da API. Para acessar a documentação da API através do Swagger UI, execute a aplicação e abra o seguinte URL no seu navegador: `http://localhost:8080/swagger-ui/index.html´
