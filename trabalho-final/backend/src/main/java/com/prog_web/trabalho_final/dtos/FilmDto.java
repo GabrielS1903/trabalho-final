@@ -1,6 +1,5 @@
 package com.prog_web.trabalho_final.dtos;
 
-import com.prog_web.trabalho_final.models.CategoryModel;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

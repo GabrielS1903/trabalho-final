@@ -1,6 +1,5 @@
 package com.prog_web.trabalho_final.controllers;
 
-import com.prog_web.trabalho_final.dtos.CategoryDto;
 import com.prog_web.trabalho_final.dtos.FilmDto;
 import com.prog_web.trabalho_final.models.CategoryModel;
 import com.prog_web.trabalho_final.models.FilmModel;

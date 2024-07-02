@@ -18,17 +18,45 @@
     </nav>
 </header>
 
-<form id="create-category-form">
-    <label for="category-name">Nome da Categoria:</label>
-    <input type="text" id="category-name" name="name" required>
-    <label for="category-status">Status:</label>
-    <select id="category-status" name="status" required>
-        <option value="ativo">Ativo</option>
-        <option value="inativo">Inativo</option>
-    </select>
-    <button type="submit">Salvar Categoria</button>
-</form>
+<main>
+    <div class="search-container">
+        <button id="open-modal">Nova categoria</button>
+    </div>
+    
+    <div class="table-container">
+    <table id="category-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aqui serão inseridas as linhas de categorias -->
+        </tbody>
+    </table>
+    </div>
+</main>
 
-<script src="scripts.js"></script>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="create-category-form" data-action="create">
+            <input type="hidden" id="category-id" name="id">
+            <label for="category-name">Nome da Categoria:</label>
+            <input type="text" id="category-name" name="name" required>
+            <label for="category-status">Status:</label>
+            <select id="category-status" name="status" required>
+                <option value="A">Ativo</option>
+                <option value="I">Inativo</option>
+            </select>
+            <button type="submit" id="save-category">Salvar Categoria</button>
+        </form>
+    </div>
+</div>
+
+
+<script src="category.js"></script>
 </body>
 </html>
